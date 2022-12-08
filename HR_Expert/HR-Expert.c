@@ -10,22 +10,20 @@
 void init()
 {
 star_loop();
-printf("HR-Expert program helps to allocate personnel on an ERP System\n");
-printf("It ensures only the most suitable candidates are locating to the different departments within the organization\n");
-printf("The organization has 16 units grouped in four corporate departments\n");
-printf("Technical, Commercial, Finance, Human Resources, Legal\n\n");
-
+printf("************ INTRO ************\n");
+printf("HR-Expert is a Knowledge-Based Expert System that helps to allocate personnel on an ERP System\n");
+printf("It ensures only the most suitable and qualified candidates are assigned to the different departments within the organization\n");
 star_loop();
-printf("To allocate a candidate, press ENTER key\n");
+printf("\nPress ENTER key to start the program.");
 getchar();
-printf("Ready to Start...\n");
+printf("Ready to Start...\n\n");
 }
 
 void checkEducation(char *name, char *qual)
 {
 	char ans_set[] = "ABCDE";
 
-	printf("\nDoes %s have academic qualifications in any of related fields? : \n", name);
+	printf("\nDoes %s have academic qualifications in any of related fields? : \n\n", name);
 	printf("A: Engineering, Science, Technology\n");
 	printf("B: Commerce, Economics, Sales, Business Administration\n");
 	printf("C: Finance, Procurement, Business Management\n");
@@ -48,27 +46,27 @@ void checkCertification(char *name, char *cert)
 	char ans_set[] = "ABCDEFGHIJKLM";
 
 	printf("\nDoes %s have any advanced qualifications or professional certifications in any of the related fields? : \n\n", name);
-	printf("A: Project Management\n");
+	printf("A: Project Management\t");
 	printf("B: Operations Management\n");
-	printf("C: HSE\n");
+	printf("C: HSE\t\t\t");
 	printf("D: Sales\n");
-	printf("E: Marketing\n");
+	printf("E: Marketing\t\t\t");
 	printf("F: Customer Relations\n");
-	printf("G: Audit\n");
+	printf("G: Audit\t\t\t");
 	printf("H: Tax\n");
 	printf("I: Procurement and Supply Chain Management\n");
-	printf("J: Training and Development\n");
+	printf("J: Training and Development\t");
 	printf("K: Business Administration\n");
-	printf("L: Personnel Administration\n");
+	printf("L: Personnel Administration\t");
 	printf("M: Law\n");
-	printf("\nEnter the applicable option: \n\n");
+	printf("\nEnter the applicable option: ");
 	scanf("%s", cert);
 	
 	char *ptr;
 	ptr = strchr(ans_set, cert[0]);
 	while (ptr == NULL)
 	{
-		printf("Enter the applicable option: \n");
+		printf("Enter the applicable option: ");
 	    scanf("%s", cert);
 	    ptr = strchr(ans_set, cert[0]);
 	}
@@ -77,18 +75,26 @@ void checkCertification(char *name, char *cert)
 void hasWorkExperience(char *name, char *workExperience)
 {
 	char ans_set[] = "YN";
-	printf("Does %s have relevant work experience relating to his/her educational/professional qualification? : \n");
-	printf("\nEnter Y for yes or N for no: \n");
+	printf("Does %s have relevant work experience relating to his/her educational/professional qualification? : \n", name);
+	printf("\nEnter Y for yes or N for no: ");
 	scanf("%s", workExperience);
 	char *ptr;
 	ptr = strchr(ans_set, workExperience[0]);
 	while (ptr == NULL)
 	{
-		printf("Enter the applicable option: \n");
+		printf("Enter the applicable option: ");
 	    scanf("%s", workExperience);
 	    ptr = strchr(ans_set, workExperience[0]);
 	}
 	
+}
+
+int yearsOfExperience(char *name)
+{
+	int years = 0;
+	printf("How many years of relevant work experience does %s have? : ", name);
+	scanf("%d", &years);
+	return years;
 }
 
 int main(void)
@@ -97,6 +103,7 @@ int main(void)
     char qual[2];
     char cert[2];
     char workExperience[2];
+    int years = 0;
 	init();	
 
 		
@@ -104,11 +111,15 @@ int main(void)
 	scanf("%s", name);
 	checkEducation(name, qual);
 	dash_lane();
-	//printf("\n%s: %s\n", name, qual);
 	checkCertification(name, cert);
 	dash_lane();
 	hasWorkExperience(name, workExperience);
-	printf("\n%s: educational background= %s\n%s: professional certifications= %s\n%s: work experience= %s\n", name, qual, name, cert, name, workExperience);
-	
+	dash_lane();
+	years = yearsOfExperience(name);
+	printf("*** Name : %s ***\n", name);
+	printf("Educational background: %s\n", qual);
+	printf("Professional certifications: %s\n", cert);
+	printf("Prior work experience: %s\n", workExperience);
+	printf("Years of Experience: %d\n", years);
 	return 0;
 }

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//void star_loop(char *s);
 void star_loop();
 void dash_lane();
 
