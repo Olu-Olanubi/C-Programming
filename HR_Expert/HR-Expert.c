@@ -82,7 +82,7 @@ void hasWorkExperience(char *name, char *workExperience)
 	ptr = strchr(ans_set, workExperience[0]);
 	while (ptr == NULL)
 	{
-		printf("Enter the applicable option: ");
+		printf("Enter the applicable option (Y or N) : ");
 	    scanf("%s", workExperience);
 	    ptr = strchr(ans_set, workExperience[0]);
 	}
@@ -100,9 +100,18 @@ int yearsOfExperience(char *name)
 int checkOtherSkills(char *name)
 {
     int others = 0;
-    printf("How will you rate %s's interpersonal and leadership qualities? : ", name);
-    scanf("%d\n", &others);
-    return others;
+    printf("How will you rate %s's interpersonal and leadership qualities? : \n", name);
+  printf("5 : VERY HIGH\n4 : HIGH\n3 : NORMAL\n2 : LOW\n1 : VERY LOW\n");
+  printf("Enter the corresponding number between 1 and 5 : ");
+  scanf("%d", &others);
+ while (!(others <= 5 && others >= 1))
+  {
+    printf("Enter only a corresponding number between 1 and 5 : ");
+    scanf("%d", &others); 
+    if ((others <= 5 && others >= 1))
+      break;
+  }
+  return others;
 }
 
 int main(void)
