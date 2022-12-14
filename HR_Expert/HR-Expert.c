@@ -116,7 +116,8 @@ int checkOtherSkills(char *name)
 
 int main(void)
 {
-    char name[25];
+    Employee employee;
+	char name[25];
     char qual[2];
     char cert[2];
     char workExperience[2];
@@ -128,21 +129,21 @@ int main(void)
 		
     printf("What is the candidate's name: ");
 	  scanf("%s", name);
-	  checkEducation(name, qual);
+	  checkEducation(employee.name, employee.qual);
 	  dash_lane();
-	  checkCertification(name, cert);
+	  checkCertification(employee.name, employee.cert);
 	  dash_lane();
-	  hasWorkExperience(name, workExperience);
+	  //hasWorkExperience(name, workExperience);
 	  dash_lane();
-	  years = yearsOfExperience(name);
+	  employee.years = yearsOfExperience(employee.name);
     dash_lane();
-    softSkillsLevel = checkOtherSkills(name);
+    employee.softSkillsLevel = checkOtherSkills(employee.name);
     dash_lane();
-	  printf("*** Name : %s ***\n", name);
-	  printf("Educational background: %s\n", qual);
-	  printf("Professional certifications: %s\n", cert);
-	  printf("Prior work experience: %s\n", workExperience);
-	  printf("Years of Experience: %d\n", years);
-    printf("Soft Skills Level: %d\n", softSkillsLevel);
+	  printf("*** Name : %s ***\n", employee.name);
+	  printf("Educational background: %s\n", employee.qual);
+	  printf("Professional certifications: %s\n", employee.cert);
+	  //printf("Prior work experience: %s\n", workExperience);
+	  printf("Years of Experience: %d\n", employee.years);
+    printf("Soft Skills Level: %d\n", employee.softSkillsLevel);
 	  return 0;
 }
