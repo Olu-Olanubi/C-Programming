@@ -1,5 +1,8 @@
-#include "main.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
 /*
 	Name: 
 	Copyright: 
@@ -42,6 +45,7 @@ void star_loop(char *str)
 }
 */
 
+
 void star_loop()
 {
 	int i = 0;
@@ -63,3 +67,4 @@ void dash_lane()
 	}
 	printf("\n");
 }
+		

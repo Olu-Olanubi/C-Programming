@@ -1,5 +1,9 @@
 #include "main.h"
 #include <string.h>
+#include "structs.h"
+#include <stdlib.h>
+
+
 /*
 	Name: 
 	Copyright: 
@@ -14,28 +18,38 @@ printf("************ INTRO ************\n");
 printf("HR-Expert is a Knowledge-Based Expert System that helps to allocate personnel on an ERP System\n");
 printf("It ensures only the most suitable and qualified candidates are assigned to the different departments within the organization\n");
 star_loop();
-printf("\nPress ENTER key to start the program.");
+printf("Press ENTER key to start the program.");
 getchar();
-printf("Ready to Start...\n\n");
+printf("STARTING...\n\n");
 }
 
 void checkEducation(char *name, char *qual)
 {
-	char ans_set[] = "ABCDE";
-
+	char ans_set[] = "ABCD";
+	
 	printf("\nDoes %s have academic qualifications in any of related fields? : \n\n", name);
+	/*
 	printf("A: Engineering, Science, Technology\n");
 	printf("B: Commerce, Economics, Sales, Business Administration\n");
 	printf("C: Finance, Procurement, Business Management\n");
 	printf("D: Arts, Social Sciences, Law\n");
 	printf("E: None\n\n");
 	printf("Enter the applicable option (A, B, C, D, E): \n");
+	*/
+
+	int i;
+	for (i = 0; i < (sizeof(QUAL_OPTIONS)/sizeof(QUAL_OPTIONS[0])); i++)
+	{
+		printf(" %c : ", QUAL_OPTIONS[i].key);
+		printf("%s\n", QUAL_OPTIONS[i].val);
+	}
+	printf("\nEnter the most suitable option: ");
 	scanf("%s", qual);
 	char *ptr;
 	ptr = strchr(ans_set, qual[0]);
 	while (ptr == NULL)
 	{
-		printf("Enter the applicable option (A, B, C, D, E): \n");
+		printf("Enter the applicable option (A, B, C, D): \n");
 	    scanf("%s", qual);
 	    ptr = strchr(ans_set, qual[0]);
 	}
@@ -43,9 +57,11 @@ void checkEducation(char *name, char *qual)
 }
 void checkCertification(char *name, char *cert)
 {
-	char ans_set[] = "ABCDEFGHIJKLM";
+	char ans_set[] = "ABCDEFGHIJKLMNO";
+
 
 	printf("\nDoes %s have any advanced qualifications or professional certifications in any of the related fields? : \n\n", name);
+	/*
 	printf("A: Project Management\t");
 	printf("B: Operations Management\n");
 	printf("C: HSE\t\t\t");
@@ -60,7 +76,16 @@ void checkCertification(char *name, char *cert)
 	printf("L: Personnel Administration\t");
 	printf("M: Law\n");
 	printf("\nEnter the applicable option: ");
+	*/
+	int i;
+	for (i = 0; i < (sizeof(CERT_OPTIONS)/sizeof(CERT_OPTIONS[0])); i++)
+	{
+		printf(" %c : ", CERT_OPTIONS[i].key);
+		printf("%s\n", CERT_OPTIONS[i].val);
+	}
+	printf("\nEnter the most suitable option: ");
 	scanf("%s", cert);
+	
 	
 	char *ptr;
 	ptr = strchr(ans_set, cert[0]);
@@ -97,53 +122,71 @@ int yearsOfExperience(char *name)
 	return years;
 }
 
-int checkOtherSkills(char *name)
+int checkSkills(char *name)
 {
     int others = 0;
-    printf("How will you rate %s's interpersonal and leadership qualities? : \n", name);
+    printf("How will you rate %s's skills level? : \n", name);
+    /*
   printf("5 : VERY HIGH\n4 : HIGH\n3 : NORMAL\n2 : LOW\n1 : VERY LOW\n");
   printf("Enter the corresponding number between 1 and 5 : ");
-  scanf("%d", &others);
- while (!(others <= 5 && others >= 1))
-  {
-    printf("Enter only a corresponding number between 1 and 5 : ");
-    scanf("%d", &others); 
-    if ((others <= 5 && others >= 1))
-      break;
-  }
-  return others;
+  */
+  	int i;
+	for (i = 0; i < (sizeof(SKILL_OPTIONS)/sizeof(SKILL_OPTIONS[0])); i++)
+	{
+		printf(" %d : ", SKILL_OPTIONS[i].key);
+		printf("%s\n", SKILL_OPTIONS[i].val);
+	}
+	printf("\nEnter the most suitable option: ");
+    scanf("%d", &others);
+	 while (!(others <= 5 && others >= 1))
+	  {
+	    printf("Enter only a corresponding number between 1 and 5 : ");
+	    scanf("%d", &others); 
+	    if ((others <= 5 && others >= 1))
+	      break;
+	  }
+	  return others;
 }
 
+/*Employee getInformation()
+{
+	Employee emp;
+	printf("What is the candidate's name: ");
+	scanf("%[^\n]%*c", employee.name);
+	
+}*/
 int main(void)
 {
     Employee employee;
-	char name[25];
-    char qual[2];
-    char cert[2];
-    char workExperience[2];
-    int years = 0;
-    int softSkillsLevel = 0;
-  
-	  init();	
+    int WAIT_TIME = 1;
+	
+	init();
+	sleep(WAIT_TIME);	
 
-		
-    printf("What is the candidate's name: ");
-	  scanf("%s", name);
-	  checkEducation(employee.name, employee.qual);
-	  dash_lane();
-	  checkCertification(employee.name, employee.cert);
-	  dash_lane();
-	  //hasWorkExperience(name, workExperience);
-	  dash_lane();
-	  employee.years = yearsOfExperience(employee.name);
+	printf("What is the candidate's name: ");
+	scanf("%s", employee.name);
+	sleep(WAIT_TIME);
+	checkEducation(employee.name, employee.qual);
+	sleep(WAIT_TIME);	
+	dash_lane();
+	checkCertification(employee.name, employee.cert);
+	sleep(WAIT_TIME);	
+	dash_lane();
+	//hasWorkExperience(name, workExperience);
+	//dash_lane();
+	employee.years = yearsOfExperience(employee.name);
+    sleep(WAIT_TIME);	
     dash_lane();
-    employee.softSkillsLevel = checkOtherSkills(employee.name);
+    employee.skills = checkSkills(employee.name);
+    sleep(WAIT_TIME);	
     dash_lane();
-	  printf("*** Name : %s ***\n", employee.name);
-	  printf("Educational background: %s\n", employee.qual);
-	  printf("Professional certifications: %s\n", employee.cert);
-	  //printf("Prior work experience: %s\n", workExperience);
-	  printf("Years of Experience: %d\n", employee.years);
-    printf("Soft Skills Level: %d\n", employee.softSkillsLevel);
-	  return 0;
+	printf("*** Name : %s ***\n", employee.name);
+	printf("Educational background: %s\n", employee.qual);
+	printf("Professional certifications: %s\n", employee.cert);
+	//printf("Prior work experience: %s\n", workExperience);
+	printf("Years of Experience: %d\n", employee.years);
+    printf("Soft Skills Level: %d\n", employee.skills);
+	return 0;
+	  
+	  //employee = getInformation();
 }
