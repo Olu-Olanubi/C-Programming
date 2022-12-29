@@ -15,7 +15,8 @@ void init()
 {
 star_line(" INTRO ");
 //printf("************ INTRO ************\n");
-printf("\nHR-Expert is a Knowledge-Based Expert System that helps to allocate personnel on an ERP System in an organization\n");
+printf("\nHR-Expert is a Knowledge-Based Expert System that allocates human resources in an organization\n");
+printf("to suitable departments and assigns suitable job roles within the defined framework of the organization\n");
 printf("It ensures that only the most suitable and qualified candidates are assigned to the different departments within the organization\n\n");
 star_line("*");
 printf("Press ENTER key to start the program.\n");
