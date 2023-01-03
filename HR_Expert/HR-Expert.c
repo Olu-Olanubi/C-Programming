@@ -19,9 +19,9 @@ printf("\nHR-Expert is a Knowledge-Based Expert System that allocates human reso
 printf("to suitable departments and assigns suitable job roles within the defined framework of the organization\n");
 printf("It ensures that only the most suitable and qualified candidates are assigned to the different departments within the organization\n\n");
 star_line("*");
-printf("Press ENTER key to start the program.\n");
-getchar();
-printf("STARTING...........\n\n");
+//printf("Press ENTER key to start the program.\n");
+//getchar();
+//printf("STARTING...........\n\n");
 }
 
 //Function to check the educational qualification
@@ -49,7 +49,6 @@ void checkEducation(char *name, char *qual)
 	printf("\nEnter the most suitable option: ");
 	//Receive the option entry from the user
 	scanf("%s", qual);
-	
 	//Check if the entry is among the valid options
 	char *ptr;
 	ptr = strchr(ans_set, qual[0]);
@@ -129,78 +128,99 @@ int main(void)
 {
     Employee employee; 
 	Result res;
-    float WAIT_TIME = 0.75;
+    int WAIT_TIME = 1;
 	int i;
-	
+	char ch;
 	init();
-	sleep(WAIT_TIME);	
-
-	printf("What is the candidate's name: ");
-	scanf("%s", employee.name);
-	sleep(WAIT_TIME);
-	checkEducation(employee.name, employee.qual);
-	sleep(WAIT_TIME);	
-	dash_lane();
-	checkCertification(employee.name, employee.cert);
-	sleep(WAIT_TIME);	
-	dash_lane();
 	
-	employee.years = yearsOfExperience(employee.name);
-    sleep(WAIT_TIME);	
-    dash_lane();
-    employee.skills = checkSkills(employee.name);
-    sleep(WAIT_TIME * 2);	
-
-
-    //dash_lane();
-	printf("\n\n");
-	star_line(" RESULT ");
-	//Print Qualification
-	//printf("Educational background: %s\n", employee.qual);
-	printf("Name:\t\t\t\t%s\n", employee.name);
-	for (i = 0; i < (sizeof(QUAL_OPTIONS)/sizeof(QUAL_OPTIONS[0])); i++)
+	while (1)
 	{
-		if(strcmp(QUAL_OPTIONS[i].key, employee.qual) == 0)
+		printf("Enter Y to continue, N to exit.\n");
+		//scanf("%c", &ch);
+		ch = toupper(getchar());
+		if (ch == 89)
 		{
-			printf("Educational background:\t\t");
-		    to_uppercase(QUAL_OPTIONS[i].val);
-		}
-	}
 
-	//Print Advanced certification
-	//printf("Professional Experience: %s\n", employee.cert);
-	for (i = 0; i < (sizeof(CERT_OPTIONS)/sizeof(CERT_OPTIONS[0])); i++)
-	{
-		if(strcmp(CERT_OPTIONS[i].key, employee.cert) == 0)
+			sleep(WAIT_TIME);	
+			//Get the candidate's name
+			printf("What is the candidate's name: ");
+			scanf("%s", employee.name);
+			sleep(WAIT_TIME);
+			//Get educational background
+			checkEducation(employee.name, employee.qual);
+			sleep(WAIT_TIME);	
+			dash_lane();
+			//get professional experience
+			checkCertification(employee.name, employee.cert);
+			sleep(WAIT_TIME);	
+			dash_lane();
+			//get years of experience
+			employee.years = yearsOfExperience(employee.name);
+			sleep(WAIT_TIME);	
+			dash_lane();
+			//get skill level
+			employee.skills = checkSkills(employee.name);
+			sleep(WAIT_TIME * 2);	
+
+
+			//dash_lane();
+			printf("\n\n");
+			star_line(" RESULT ");
+			//Print candidate's profile
+			
+			printf("Name:\t\t\t\t%s\n", employee.name);
+			for (i = 0; i < (sizeof(QUAL_OPTIONS)/sizeof(QUAL_OPTIONS[0])); i++)
+			{
+				if(strcmp(QUAL_OPTIONS[i].key, employee.qual) == 0)
+				{
+					printf("Educational background:\t\t");
+					to_uppercase(QUAL_OPTIONS[i].val);
+				}
+			}
+
+			//Print Advanced certification
+			
+			for (i = 0; i < (sizeof(CERT_OPTIONS)/sizeof(CERT_OPTIONS[0])); i++)
+			{
+				if(strcmp(CERT_OPTIONS[i].key, employee.cert) == 0)
+				{
+					printf("Professional Experience:\t");
+					to_uppercase(CERT_OPTIONS[i].val);
+				}
+			}
+			
+			//Print Years of Experience
+			printf("Years of Experience:\t\t%d\n", employee.years);
+			
+
+			//Print Skills level
+			
+			for (i = 0; i < (sizeof(SKILL_OPTIONS)/sizeof(SKILL_OPTIONS[0])); i++)
+			{
+				if(SKILL_OPTIONS[i].key == employee.skills)
+				printf("Skills Level:\t\t\t%s\n ", SKILL_OPTIONS[i].val);
+			}
+			
+			processInputs(&employee, &res);
+			
+			dash_lane();
+			printf("Based on %s's profile...,\n\n", employee.name);
+			printf("%s should be assigned to:  %s Department\n\n", employee.name, res.dept);
+			printf("Most suitable job role is: %s\n\n",res.role);
+			star_line(" END ");
+			printf("\n");
+			
+			//system("pause");
+		}
+		else if (ch == 78)
 		{
-		    printf("Professional Experience:\t");
-		    to_uppercase(CERT_OPTIONS[i].val);
+			printf("Exiting program...\n");
+			sleep(WAIT_TIME);
+    		exit(0);
 		}
-	}
+		getchar();
+	} 
 	
-	//Print Years of Experience
-	printf("Years of Experience:\t\t%d\n", employee.years);
-	
-
-	//Print Skills level
-    //printf("Soft Skills Level: %d\n", employee.skills);
-	for (i = 0; i < (sizeof(SKILL_OPTIONS)/sizeof(SKILL_OPTIONS[0])); i++)
-	{
-		if(SKILL_OPTIONS[i].key == employee.skills)
-		printf("Skills Level:\t\t\t%s\n ", SKILL_OPTIONS[i].val);
-	}
-    
-	processInputs(&employee, &res);
-	//strcpy(employee.name, res.dept);
-    //printf("%s\n", res.dept);
-	dash_lane();
-	printf("Based on %s's profile...,\n\n", employee.name);
-	printf("The best suited department for %s is:  %s Department\n\n", employee.name, res.dept);
-	printf("Most suitable job role is: %s\n\n",res.role);
-	star_line(" END ");
-	system("pause");
 	return 0;
-	  
-	  //employee = getInformation();
 	  
 }

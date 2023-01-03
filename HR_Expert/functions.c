@@ -24,7 +24,7 @@ void star_line(char *str)
 	}
 	*/
 	//printf("%d\n", len);
-	int trigger = 60-(len/2);
+	int trigger = 58-(len/2);
 	int i = 0;
 	for(i = 0; i < trigger; i++)
 		printf("*");
@@ -38,7 +38,7 @@ void star_line(char *str)
 void dash_lane()
 {
 	int i = 0;
-	while (i < 120)
+	while (i < 116)
 	{
 		printf("-");
 		i++;
@@ -93,4 +93,14 @@ void to_uppercase(char* str) {
     s[i] = toupper(str[i]);
   }
   printf("%s\n", s);
+}
+
+void getName(Employee *s)
+{
+	printf("What is the candidate's name: ");
+	scanf("%s", s->name);
+}
+void getQualification(Employee *s)
+{
+	checkEducation(s->name, s->qual);
 }
