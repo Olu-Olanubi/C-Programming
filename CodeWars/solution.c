@@ -13,32 +13,13 @@ bool solution(char* arg1, char* arg2)
 {
     int n = strlen(arg1);
     int k = strlen(arg2);
-    int j;
-    j = 0;
-    char rev_arg1[n+1];
-    char rev_arg2[k+1];
+    int j = 0;
+   
+    if (n < k) return false;
 
-    //reverse arg1
-    for(int i = n; i >= 0; i--)
+    for (int i = n - k; i <= n; i++)
     {
-        rev_arg1[j] = arg1[i];
-        j++;
-    }
-    rev_arg1[j+1] = '\0';
-    //reset j to 0
-    j = 0;
-    //reverse arg2
-    for(int i = k; i >= 0; i--)
-    {
-        rev_arg2[j] = arg2[i];
-        j++;
-    }
-    rev_arg2[j+1] = '\0';
-    //reset j to 0 again
-    j = 0;
-    while(rev_arg2[j] != '\0')
-    {
-        if(rev_arg2[j] = rev_arg1[j])
+        if(arg1[i] == arg2[j])
         j++;
         else
         return false;
